@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break Timer</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Set the background image */
+        body {
+            background-image: url('breakimage.png');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container for the timer */
+        .timer-container {
+            position: absolute;
+            top: 46%;
+            left: 20.75%;
+            width: 150px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rtra(0, 0, 0, 0.7); /* Slightly dark background to match screenshot */
+            color: white;
+            font-size: 5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Timer container -->
+    <div class="timer-container" id="timer">10:00</div>
+
+    <script>
+        // Countdown timer function
+        let timerDuration = 10 * 60; // 10 minutes in seconds
+        const timerElement = document.getElementById("timer");
+
+        function startTimer() {
+            const countdown = setInterval(function() {
+                let minutes = Math.floor(timerDuration / 60);
+                let seconds = timerDuration % 60;
+
+                // Pad seconds with leading zero if less than 10
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                // Update the timer display
+                timerElement.textContent = `${minutes}:${seconds}`;
+
+                // If timer reaches zero, stop the countdown
+                if (timerDuration <= 0) {
+                    clearInterval(countdown);
+                    timerElement.textContent = "00:00";
+                }
+
+                // Decrease timer by 1 second
+                timerDuration--;
+            }, 1000);
+        }
+
+        // Start the timer on page load
+        window.onload = startTimer;
+    </script>
+
+</body>
+</html>
